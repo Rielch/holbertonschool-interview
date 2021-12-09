@@ -10,18 +10,17 @@ def canUnlockAll(boxes):
     if type(boxes) is not list or len(boxes) == 0:
         return False
 
+    def checkKeys(boxes, key, keys_list):
+        """Check all keys in a given box"""
+
+        keys_list.append(key)
+        for new_key in boxes[key]:
+            if new_key not in keys_list and new_key < len(boxes):
+                checkKeys(boxes, new_key, keys_list)
+
     keys_list = []
     checkKeys(boxes, 0, keys_list)
 
     if len(keys_list) != len(boxes):
         return False
     return True
-
-
-def checkKeys(boxes, key, keys_list):
-    """Check all keys in a given box"""
-
-    keys_list.append(key)
-    for new_key in boxes[key]:
-        if new_key not in keys_list and new_key < len(boxes):
-            checkKeys(boxes, new_key, keys_list)

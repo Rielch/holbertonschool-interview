@@ -7,8 +7,8 @@ each box may contain keys to the other boxes."""
 def canUnlockAll(boxes):
     """Method that determines if all the boxes can be opened"""
 
-    if not boxes[0] or not isinstance(boxes[0], list):
-        return false
+    if type(boxes) is not list or len(boxes) == 0:
+        return False
 
     def checkKeys(boxes, key, keys_list):
         """Check all keys in a given box"""

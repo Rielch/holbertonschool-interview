@@ -18,9 +18,7 @@ def canUnlockAll(boxes):
 def checkKeys(boxes, key, keys_list):
     """Check all keys in a given box"""
 
-    if key not in keys_list:
-        keys_list.append(key)
-
+    keys_list.append(key)
     for new_key in boxes[key]:
-        if new_key not in keys_list:
+        if new_key not in keys_list and new_key < len(boxes):
             checkKeys(boxes, new_key, keys_list)

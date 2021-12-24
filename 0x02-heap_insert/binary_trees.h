@@ -25,6 +25,7 @@ void binary_tree_print(const binary_tree_t *);
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int value);
 heap_t *heap_insert(heap_t **root, int value);
 heap_t *insert_last_heap(heap_t **root, int value);
-void heap_sort(heap_t *node);
+int deep_node(heap_t *node);
+heap_t *heap_sort(heap_t *node);
 
 #endif /* _BINARY_TREES_H_ */

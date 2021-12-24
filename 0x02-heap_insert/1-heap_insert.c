@@ -25,7 +25,7 @@ heap_t *new;
  else
    {
      new = insert_last_heap(root, value);
-     heap_sort(new);
+     new = heap_sort(new);
    }
  return (new);
 }
@@ -54,8 +54,30 @@ heap_t *insert_last_heap(heap_t **root, int value)
       node->right = new;
       return (new);
     }
-  new = insert_last_heap(&node->left, value);
+  if (deep_node(node->left) > deep_node(node->right))
+    {
+      new = insert_last_heap(&node->right, value);
+    }
+  else
+    {
+      new = insert_last_heap(&node->left, value);
+    }
   return (new);
+}
+
+/**
+ * deep_node - calculates the deep of a binary_tree
+ *
+ * @node: root of the binary tree
+ * Return: Deep of the tree
+ */
+
+int deep_node(heap_t *node)
+{
+  if (node == NULL)
+    return (0);
+
+  return (deep_node(node->right) + 1);
 }
 
 /**
@@ -65,16 +87,18 @@ heap_t *insert_last_heap(heap_t **root, int value)
  * Return: Void
  */
 
-void heap_sort(heap_t *node)
+heap_t *heap_sort(heap_t *node)
 {
   int temp;
 
-  if (node->n < node->parent->n)
-    return;
-  while (node->n > node->parent->n)
+  if (node->parent == NULL || node->n < node->parent->n)
+    return (node);
+  if (node->n > node->parent->n)
     {
-      temp = node->parent->n;
-      node->parent->n = node->n;
-      node->n = temp;
+      temp = node->n;
+      node->n = node->parent->n;
+      node->parent->n = temp;
+      return(heap_sort(node->parent));
     }
+  return (node);
 }

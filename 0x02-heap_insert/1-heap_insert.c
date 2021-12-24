@@ -13,21 +13,21 @@ heap_t *heap_insert(heap_t **root, int value)
 {
 heap_t *new;
 
- if (root == NULL)
-   {
-     return (NULL);
-   }
- if (*root == NULL)
-   {
-     new = binary_tree_node(*root, value);
-     *root = new;
-   }
- else
-   {
-     new = insert_last_heap(root, value);
-     new = heap_sort(new);
-   }
- return (new);
+if (root == NULL)
+{
+return (NULL);
+}
+if (*root == NULL)
+{
+new = binary_tree_node(*root, value);
+*root = new;
+}
+else
+{
+new = insert_last_heap(root, value);
+new = heap_sort(new);
+}
+return (new);
 }
 
 /**
@@ -40,29 +40,29 @@ heap_t *new;
 
 heap_t *insert_last_heap(heap_t **root, int value)
 {
-  heap_t *node = *root, *new;
+heap_t *node = *root, *new;
 
-  if (node->left == NULL)
-    {
-      new = binary_tree_node(node, value);
-      node->left = new;
-      return (new);
-    }
-  else if (node->right == NULL)
-    {
-      new = binary_tree_node(node, value);
-      node->right = new;
-      return (new);
-    }
-  if (deep_node(node->left) > deep_node(node->right))
-    {
-      new = insert_last_heap(&node->right, value);
-    }
-  else
-    {
-      new = insert_last_heap(&node->left, value);
-    }
-  return (new);
+if (node->left == NULL)
+{
+new = binary_tree_node(node, value);
+node->left = new;
+return (new);
+}
+else if (node->right == NULL)
+{
+new = binary_tree_node(node, value);
+node->right = new;
+return (new);
+}
+if (deep_node(node->left) > deep_node(node->right))
+{
+new = insert_last_heap(&node->right, value);
+}
+else
+{
+new = insert_last_heap(&node->left, value);
+}
+return (new);
 }
 
 /**
@@ -74,10 +74,10 @@ heap_t *insert_last_heap(heap_t **root, int value)
 
 int deep_node(heap_t *node)
 {
-  if (node == NULL)
-    return (0);
+if (node == NULL)
+return (0);
 
-  return (deep_node(node->right) + 1);
+return (deep_node(node->right) + 1);
 }
 
 /**
@@ -89,16 +89,16 @@ int deep_node(heap_t *node)
 
 heap_t *heap_sort(heap_t *node)
 {
-  int temp;
+int temp;
 
-  if (node->parent == NULL || node->n < node->parent->n)
-    return (node);
-  if (node->n > node->parent->n)
-    {
-      temp = node->n;
-      node->n = node->parent->n;
-      node->parent->n = temp;
-      return(heap_sort(node->parent));
-    }
-  return (node);
+if (node->parent == NULL || node->n < node->parent->n)
+return (node);
+if (node->n > node->parent->n)
+{
+temp = node->n;
+node->n = node->parent->n;
+node->parent->n = temp;
+return (heap_sort(node->parent));
+}
+return (node);
 }
